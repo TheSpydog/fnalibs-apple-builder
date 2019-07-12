@@ -1,4 +1,4 @@
-# fnalibs ios Builder
+# fnalibs ios builder
 Convenient download and build scripts for FNA's iOS / tvOS native libraries.
 
 Run `./updatelibs` to automatically clone or pull all the fnalibs. When first cloning the repos, it also applies an FNA-specific patch for SDL2 and downloads the required [CMake toolchain file](https://github.com/leetal/ios-cmake) for MojoShader.
