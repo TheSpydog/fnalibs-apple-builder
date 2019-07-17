@@ -1,0 +1,158 @@
+diff -r 886b79177762 Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
+--- a/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Jun 24 21:08:26 2019 -0700
++++ b/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Tue Jul 16 20:32:02 2019 -0400
+@@ -355,6 +355,7 @@
+ 		56ED04E1118A8EE200A56AA6 /* SDL_power.c in Sources */ = {isa = PBXBuildFile; fileRef = 56ED04E0118A8EE200A56AA6 /* SDL_power.c */; };
+ 		56ED04E3118A8EFD00A56AA6 /* SDL_syspower.m in Sources */ = {isa = PBXBuildFile; fileRef = 56ED04E2118A8EFD00A56AA6 /* SDL_syspower.m */; };
+ 		56F9D5601DF73BA400C15B5D /* SDL_dataqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 566726431DF72CF5001DD3DB /* SDL_dataqueue.c */; };
++		7B67980E22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B67980D22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c */; };
+ 		93CB792313FC5E5200BD3E05 /* SDL_uikitviewcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */; };
+ 		93CB792613FC5F5300BD3E05 /* SDL_uikitviewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */; };
+ 		A704172E20F7E74800A82227 /* controller_type.h in Headers */ = {isa = PBXBuildFile; fileRef = A704172D20F7E74800A82227 /* controller_type.h */; };
+@@ -962,6 +963,7 @@
+ 		56EA86FA13E9EC2B002E47EB /* SDL_coreaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_coreaudio.h; sourceTree = "<group>"; };
+ 		56ED04E0118A8EE200A56AA6 /* SDL_power.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_power.c; sourceTree = "<group>"; };
+ 		56ED04E2118A8EFD00A56AA6 /* SDL_syspower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_syspower.m; sourceTree = "<group>"; };
++		7B67980D22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_FNA_tvos_stubs.c; sourceTree = "<group>"; };
+ 		93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitviewcontroller.h; sourceTree = "<group>"; };
+ 		93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitviewcontroller.m; sourceTree = "<group>"; };
+ 		A704172D20F7E74800A82227 /* controller_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controller_type.h; sourceTree = "<group>"; };
+@@ -1667,6 +1669,7 @@
+ 				0442EC5412FE1C3F004C9285 /* SDL_hints.c */,
+ 				04BAC09B1300C1290055DE28 /* SDL_log.c */,
+ 				FD99B9D80DD52EDC00FB1D6B /* SDL.c */,
++				7B67980D22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c */,
+ 			);
+ 			name = "Library Source";
+ 			path = ../../src;
+@@ -2760,6 +2763,7 @@
+ 				FAB598661BB5C31600BE72C5 /* SDL_drawpoint.c in Sources */,
+ 				FAB598681BB5C31600BE72C5 /* SDL_render_sw.c in Sources */,
+ 				FAB5986A1BB5C31600BE72C5 /* SDL_rotate.c in Sources */,
++				7B67980E22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c in Sources */,
+ 				FAB5986D1BB5C31600BE72C5 /* SDL_render.c in Sources */,
+ 				FAB598711BB5C31600BE72C5 /* SDL_yuv_sw.c in Sources */,
+ 				FAB598721BB5C31600BE72C5 /* SDL_getenv.c in Sources */,
+@@ -3029,6 +3033,7 @@
+ 				ENABLE_TESTABILITY = YES;
+ 				GCC_NO_COMMON_BLOCKS = YES;
+ 				GCC_OPTIMIZATION_LEVEL = 0;
++				GCC_PREPROCESSOR_DEFINITIONS = "IOS_DYLIB=1";
+ 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+ 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+ 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+@@ -3067,6 +3072,7 @@
+ 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+ 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+ 				GCC_NO_COMMON_BLOCKS = YES;
++				GCC_PREPROCESSOR_DEFINITIONS = "IOS_DYLIB=1";
+ 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+ 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+ 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+diff -r 886b79177762 src/SDL_FNA_tvos_stubs.c
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/src/SDL_FNA_tvos_stubs.c	Tue Jul 16 20:32:02 2019 -0400
+@@ -0,0 +1,103 @@
++//
++//  SDL_FNA_tvos_dummy.c
++//  A bunch of empty function definitions for Android/Windows-specific stuff in SDL2.
++//  This is needed to avoid undefined symbol errors due to tvOS's bitcode requirement.
++//  Made for use with SDL2-CS and FNA.
++//
++//  Created by Caleb Cornett on 7/16/19.
++//  Copyright © 2019 Caleb Cornett. All rights reserved.
++//
++
++extern void SDL_SetWindowsMessageHook(void* callback, void* userdata)
++{
++}
++
++extern int SDL_Direct3D9GetAdapterIndex(int displayIndex)
++{
++    return 0;
++}
++
++extern void* SDL_RenderGetD3D9Device(void* renderer)
++{
++    return 0;
++}
++
++extern int SDL_DXGIGetOutputInfo(int displayIndex, int* adapterIndex, int* outputIndex)
++{
++    return 0;
++}
++
++extern int SDL_LinuxSetThreadPriority(long int threadID, int priority)
++{
++    return 0;
++}
++
++extern void * SDL_AndroidGetJNIEnv(void)
++{
++    return 0;
++}
++
++extern void * SDL_AndroidGetActivity(void)
++{
++    return 0;
++}
++
++extern int SDL_IsAndroidTV(void)
++{
++    return 0;
++}
++
++extern int SDL_IsChromebook(void)
++{
++    return 0;
++}
++
++extern int SDL_IsDeXMode(void)
++{
++    return 0;
++}
++
++extern void SDL_AndroidBackButton(void)
++{
++}
++
++extern const char * SDL_AndroidGetInternalStoragePath(void)
++{
++    return 0;
++}
++
++extern int SDL_AndroidGetExternalStorageState(void)
++{
++    return 0;
++}
++
++extern void* INTERNAL_SDL_AndroidGetExternalStoragePath(void)
++{
++    return 0;
++}
++
++extern const char * SDL_AndroidGetExternalStoragePath(void)
++{
++    return 0;
++}
++
++extern const void * SDL_WinRTGetFSPathUNICODE(int pathType)
++{
++    return 0;
++}
++
++extern const char * SDL_WinRTGetFSPathUTF8(int pathType)
++{
++    return 0;
++}
++
++extern int SDL_WinRTGetDeviceFamily()
++{
++    return 0;
++}
++
++extern int SDL_WinRTRunApp(void* mainFunction, void* reserved)
++{
++    return 0;
++}
++
