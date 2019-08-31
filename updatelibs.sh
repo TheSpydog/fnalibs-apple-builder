@@ -11,11 +11,6 @@ if [ ! -d "./SDL/" ]; then
 	echo "SDL folder not found. Cloning now..."
 	hg clone https://hg.libsdl.org/SDL/
 
-	# Apply the IOS_DYLIB=1 / tvOS stub patch for convenience
-	echo ""
-	echo "Applying iOS/tvOS patch for convenience..."
-	cd SDL && hg import --no-commit ../sdl2_fna_ios.patch && cd .. 
-
 	echo ""
 fi
 
@@ -55,6 +50,16 @@ fi
 # Check for updates...
 echo "Updating SDL..."
 cd SDL && hg pull -u && cd ..
+
+# Apply the IOS_DYLIB=1 / tvOS stub patch for convenience
+echo ""
+echo "Applying/Reapply iOS/tvOS patch for convenience..."
+cd SDL 
+# Reset back to pristine
+hg update -r default -C && hg st -un0 | xargs -0 rm 
+# Apply patch
+hg import --no-commit ../sdl2_fna_ios.patch
+cd .. 
 
 echo ""
 echo "Updating SDL_image..."
