@@ -7,3 +7,7 @@ Run `./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat]` to build all libr
 Note that building "*-fat" creates the combined archive as well as the individual simulator and device builds.
 
 Run `./buildlibs clean` to remove all auto-generated build directories.
+
+## dependencies
+
+Requires `git`, `hg`, and `cmake` available from the terminal.
