@@ -1,4 +1,4 @@
-#!
+#!/bin/sh
 
 # Builds all fnalibs for iOS or tvOS.
 # Written by Caleb Cornett.
@@ -226,7 +226,7 @@ function buildFAudio() {
 }
 
 function runMojoShaderCMake() {
-	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DIOS_PLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DPROFILE_METAL=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
+	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DIOS_PLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
 }
 
 function buildMojoShader() {
@@ -277,7 +277,7 @@ function buildMojoShader() {
 		cd $ORIG_DIR
 	fi
 
-	# Device
+	# tvOS Device
 	if [ $TVOS = 1 ]; then
 		cd ./mojoshader/build-tvos/
 		runMojoShaderCMake TVOS
@@ -286,7 +286,7 @@ function buildMojoShader() {
 		cd $ORIG_DIR
 	fi
 
-	# Combine
+	# tvOS Combine
 	if [ $TVOS_FAT = 1 ]; then
 		cp ./mojoshader/build-tvos/Release-appletvos/libmojoshader.a ./libmojoshader-device.a
 		cp ./mojoshader/build-tvos-sim/Release-appletvsimulator/libmojoshader.a ./libmojoshader-simulator.a
