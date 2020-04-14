@@ -1,39 +1,39 @@
-diff -r 886b79177762 Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
---- a/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Jun 24 21:08:26 2019 -0700
-+++ b/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Tue Jul 16 20:32:02 2019 -0400
-@@ -355,6 +355,7 @@
- 		56ED04E1118A8EE200A56AA6 /* SDL_power.c in Sources */ = {isa = PBXBuildFile; fileRef = 56ED04E0118A8EE200A56AA6 /* SDL_power.c */; };
- 		56ED04E3118A8EFD00A56AA6 /* SDL_syspower.m in Sources */ = {isa = PBXBuildFile; fileRef = 56ED04E2118A8EFD00A56AA6 /* SDL_syspower.m */; };
- 		56F9D5601DF73BA400C15B5D /* SDL_dataqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = 566726431DF72CF5001DD3DB /* SDL_dataqueue.c */; };
-+		7B67980E22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B67980D22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c */; };
+diff -r 7cc4fc886d9e Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
+--- a/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Dec 23 19:55:10 2019 +0300
++++ b/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Dec 23 17:31:46 2019 -0500
+@@ -359,6 +359,7 @@
+ 		63CC93C823849391002A5C54 /* SDL_strtokr.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CC93C623849391002A5C54 /* SDL_strtokr.c */; };
+ 		63CC93C923849391002A5C54 /* SDL_strtokr.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CC93C623849391002A5C54 /* SDL_strtokr.c */; };
+ 		63CC93CA23849391002A5C54 /* SDL_strtokr.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CC93C623849391002A5C54 /* SDL_strtokr.c */; };
++		7B53335B23B1778F003D1666 /* SDL_FNA_tvos_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B53335A23B1778F003D1666 /* SDL_FNA_tvos_stubs.c */; };
  		93CB792313FC5E5200BD3E05 /* SDL_uikitviewcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */; };
  		93CB792613FC5F5300BD3E05 /* SDL_uikitviewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */; };
  		A704172E20F7E74800A82227 /* controller_type.h in Headers */ = {isa = PBXBuildFile; fileRef = A704172D20F7E74800A82227 /* controller_type.h */; };
-@@ -962,6 +963,7 @@
- 		56EA86FA13E9EC2B002E47EB /* SDL_coreaudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_coreaudio.h; sourceTree = "<group>"; };
+@@ -976,6 +977,7 @@
  		56ED04E0118A8EE200A56AA6 /* SDL_power.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_power.c; sourceTree = "<group>"; };
  		56ED04E2118A8EFD00A56AA6 /* SDL_syspower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_syspower.m; sourceTree = "<group>"; };
-+		7B67980D22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = SDL_FNA_tvos_stubs.c; sourceTree = "<group>"; };
+ 		63CC93C623849391002A5C54 /* SDL_strtokr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_strtokr.c; sourceTree = "<group>"; };
++		7B53335A23B1778F003D1666 /* SDL_FNA_tvos_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_FNA_tvos_stubs.c; sourceTree = "<group>"; };
  		93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitviewcontroller.h; sourceTree = "<group>"; };
  		93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitviewcontroller.m; sourceTree = "<group>"; };
  		A704172D20F7E74800A82227 /* controller_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controller_type.h; sourceTree = "<group>"; };
-@@ -1667,6 +1669,7 @@
- 				0442EC5412FE1C3F004C9285 /* SDL_hints.c */,
- 				04BAC09B1300C1290055DE28 /* SDL_log.c */,
- 				FD99B9D80DD52EDC00FB1D6B /* SDL.c */,
-+				7B67980D22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c */,
- 			);
- 			name = "Library Source";
- 			path = ../../src;
-@@ -2760,6 +2763,7 @@
- 				FAB598661BB5C31600BE72C5 /* SDL_drawpoint.c in Sources */,
- 				FAB598681BB5C31600BE72C5 /* SDL_render_sw.c in Sources */,
- 				FAB5986A1BB5C31600BE72C5 /* SDL_rotate.c in Sources */,
-+				7B67980E22DEA2510059DDBC /* SDL_FNA_tvos_stubs.c in Sources */,
- 				FAB5986D1BB5C31600BE72C5 /* SDL_render.c in Sources */,
- 				FAB598711BB5C31600BE72C5 /* SDL_yuv_sw.c in Sources */,
- 				FAB598721BB5C31600BE72C5 /* SDL_getenv.c in Sources */,
-@@ -3029,6 +3033,7 @@
+@@ -1661,6 +1663,7 @@
+ 		FD99B8BD0DD52E6D00FB1D6B /* Library Source */ = {
+ 			isa = PBXGroup;
+ 			children = (
++				7B53335A23B1778F003D1666 /* SDL_FNA_tvos_stubs.c */,
+ 				04B2ECEF1025CEB900F9BC5F /* atomic */,
+ 				FD99B8FB0DD52EDC00FB1D6B /* audio */,
+ 				FD99B98A0DD52EDC00FB1D6B /* cpuinfo */,
+@@ -2743,6 +2746,7 @@
+ 				FAB598251BB5C31500BE72C5 /* SDL_audiocvt.c in Sources */,
+ 				FAB598271BB5C31500BE72C5 /* SDL_audiotypecvt.c in Sources */,
+ 				FAB598281BB5C31500BE72C5 /* SDL_mixer.c in Sources */,
++				7B53335B23B1778F003D1666 /* SDL_FNA_tvos_stubs.c in Sources */,
+ 				F3BDD79720F51CB8004ECBF3 /* SDL_hidapi_xboxone.c in Sources */,
+ 				FAB5982A1BB5C31500BE72C5 /* SDL_wave.c in Sources */,
+ 				FAFDF8C61D88D4530083E6F2 /* SDL_uikitclipboard.m in Sources */,
+@@ -3065,6 +3069,7 @@
  				ENABLE_TESTABILITY = YES;
  				GCC_NO_COMMON_BLOCKS = YES;
  				GCC_OPTIMIZATION_LEVEL = 0;
@@ -41,7 +41,7 @@ diff -r 886b79177762 Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
  				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
  				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
  				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-@@ -3067,6 +3072,7 @@
+@@ -3103,6 +3108,7 @@
  				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
  				ENABLE_STRICT_OBJC_MSGSEND = YES;
  				GCC_NO_COMMON_BLOCKS = YES;
@@ -49,9 +49,9 @@ diff -r 886b79177762 Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
  				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
  				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
  				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-diff -r 886b79177762 src/SDL_FNA_tvos_stubs.c
+diff -r 7cc4fc886d9e src/SDL_FNA_tvos_stubs.c
 --- /dev/null	Thu Jan 01 00:00:00 1970 +0000
-+++ b/src/SDL_FNA_tvos_stubs.c	Tue Jul 16 20:32:02 2019 -0400
++++ b/src/SDL_FNA_tvos_stubs.c	Mon Dec 23 17:31:46 2019 -0500
 @@ -0,0 +1,103 @@
 +//
 +//  SDL_FNA_tvos_dummy.c

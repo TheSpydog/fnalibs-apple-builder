@@ -1,4 +1,4 @@
-#!
+#!/bin/sh
 
 # Clones or pulls the latest fnalibs.
 # Intended for use with FNA on iOS / tvOS.
