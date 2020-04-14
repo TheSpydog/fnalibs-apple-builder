@@ -53,7 +53,7 @@ cd SDL && hg pull -u && cd ..
 
 # Apply the IOS_DYLIB=1 / tvOS stub patch for convenience
 echo ""
-echo "Applying/Reapply iOS/tvOS patch for convenience..."
+echo "Applying iOS/tvOS patch for convenience..."
 cd SDL 
 # Reset back to pristine
 hg update -r default -C && hg st -un0 | xargs -0 rm 
