@@ -19,9 +19,9 @@ if [ ! -d "./SDL/" ]; then
 	echo ""
 fi
 
-if [ ! -d "./SDL_image/" ]; then
-	echo "SDL_image folder not found. Cloning now..."
-	hg clone https://hg.libsdl.org/SDL_image/
+if [ ! -d "./FNA3D/" ]; then
+	echo "FNA3D folder not found. Cloning now..."
+	git clone https://github.com/FNA-XNA/FNA3D.git --recursive
 
 	echo ""
 fi
@@ -29,18 +29,6 @@ fi
 if [ ! -d "./FAudio/" ]; then
 	echo "FAudio folder not found. Cloning now..."
 	git clone https://github.com/FNA-XNA/FAudio.git
-
-	echo ""
-fi
-
-if [ ! -d "./MojoShader/" ]; then
-	echo "MojoShader folder not found. Cloning now..."
-	git clone https://github.com/FNA-XNA/MojoShader
-
-	# Download the iOS CMake toolchain file too for convenience
-	echo ""
-	echo "Downloading ios.toolchain.cmake [https://github.com/leetal/ios-cmake] for convenience..."
-	cd MojoShader && curl -O https://raw.githubusercontent.com/leetal/ios-cmake/master/ios.toolchain.cmake && cd ..
 
 	echo ""
 fi
@@ -57,16 +45,12 @@ echo "Updating SDL..."
 cd SDL && hg pull -u && cd ..
 
 echo ""
-echo "Updating SDL_image..."
-cd SDL_image && hg pull -u && cd ..
+echo "Updating FNA3D..."
+cd FNA3D && git pull && git submodule update && cd ..
 
 echo ""
 echo "Updating FAudio..."
 cd FAudio && git pull && cd ..
-
-echo ""
-echo "Updating MojoShader..."
-cd mojoshader && git pull && cd ..
 
 echo ""
 echo "Updating Theorafile..."

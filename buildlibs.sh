@@ -53,14 +53,10 @@ elif [ $1 = "clean" ]; then
 	rm ./release/tvos/fat/*
 
 	rm -r ./SDL/Xcode-iOS/SDL/build
-	rm -r ./SDL_image/Xcode-iOS/build
+	rm -r ./FNA3D/Xcode-iOS/build
 	rm -r ./FAudio/Xcode-iOS/build
 	rm -r ./Theorafile/Xcode-iOS/build
 
-	rm -r ./mojoshader/build-ios
-	rm -r ./mojoshader/build-ios-sim
-	rm -r ./mojoshader/build-tvos
-	rm -r ./mojoshader/build-tvos-sim
 	exit 0
 else
 	error
@@ -68,12 +64,12 @@ fi
 
 # Get the directories...
 SDL_DIR="SDL/Xcode-iOS/SDL"
-IMG_DIR="SDL_image/Xcode-iOS"
+FNA3D_DIR="FNA3D/Xcode-iOS"
 FAUDIO_DIR="FAudio/Xcode-iOS"
 THEO_DIR="Theorafile/Xcode-iOS"
 
 SDL_PROJ="SDL.xcodeproj"
-IMG_PROJ="SDL_image.xcodeproj"
+FNA3D_PROJ="FNA3D.xcodeproj"
 FAUDIO_PROJ="FAudio.xcodeproj"
 THEO_PROJ="theorafile.xcodeproj"
 
@@ -135,46 +131,52 @@ function buildSDL() {
 	fi
 }
 
-function buildIMG() {
+function buildFNA3D() {
+	# Workaround for FNA3D's dependency on SDL2/ and not SDL/
+	mv ./SDL ./SDL2
+
 	# iOS Simulator
 	if [ $IOS_SIM = 1 ]; then
-		xcodebuild -project $IMG_DIR/$IMG_PROJ -target libSDL_image-iOS -config Release -sdk iphonesimulator
-		cp $IMG_DIR/build/Release-iphonesimulator/libSDL2_image.a ./release/ios/simulator/libSDL2_image.a
+		xcodebuild -project $FNA3D_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk iphonesimulator
+		cp $FNA3D_DIR/build/Release-iphonesimulator/libFNA3D.a ./release/ios/simulator/libFNA3D.a
 	fi
 
 	# iOS Device
 	if [ $IOS = 1 ]; then
-		xcodebuild -project $IMG_DIR/$IMG_PROJ -target libSDL_image-iOS -config Release -sdk iphoneos
-		cp $IMG_DIR/build/Release-iphoneos/libSDL2_image.a ./release/ios/device/libSDL2_image.a
+		xcodebuild -project $FNA3D_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk iphoneos
+		cp $FNA3D_DIR/build/Release-iphoneos/libFNA3D.a ./release/ios/device/libFNA3D.a
 	fi
 
 	# iOS Combine
 	if [ $IOS_FAT = 1 ]; then
-		cp $IMG_DIR/build/Release-iphoneos/libSDL2_image.a ./libSDL2_image-device.a
-		cp $IMG_DIR/build/Release-iphonesimulator/libSDL2_image.a ./libSDL2_image-simulator.a
-		lipo -create libSDL2_image-device.a libSDL2_image-simulator.a -output ./release/ios/fat/libSDL2_image.a
-		rm libSDL2_image-*
+		cp $FNA3D_DIR/build/Release-iphoneos/libFNA3D.a ./libFNA3D-device.a
+		cp $FNA3D_DIR/build/Release-iphonesimulator/libFNA3D.a ./libFNA3D-simulator.a
+		lipo -create libFNA3D-device.a libFNA3D-simulator.a -output ./release/ios/fat/libFNA3D.a
+		rm libFNA3D-*
 	fi
 
 	# tvOS Simulator
 	if [ $TVOS_SIM = 1 ]; then
-		xcodebuild -project $IMG_DIR/$IMG_PROJ -target libSDL_image-tvOS -config Release -sdk appletvsimulator
-		cp $IMG_DIR/build/Release-appletvsimulator/libSDL2_image.a ./release/tvos/simulator/libSDL2_image.a
+		xcodebuild -project $FNA3D_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk appletvsimulator
+		cp $FNA3D_DIR/build/Release-appletvsimulator/libFNA3D.a ./release/tvos/simulator/libFNA3D.a
 	fi
 
 	# tvOS Device
 	if [ $TVOS = 1 ]; then
-		xcodebuild -project $IMG_DIR/$IMG_PROJ -target libSDL_image-tvOS -config Release -sdk appletvos
-		cp $IMG_DIR/build/Release-appletvos/libSDL2_image.a ./release/tvos/device/libSDL2_image.a
+		xcodebuild -project $FNA3D_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk appletvos
+		cp $FNA3D_DIR/build/Release-appletvos/libFNA3D.a ./release/tvos/device/libFNA3D.a
 	fi
 
 	# tvOS Combine
 	if [ $TVOS_FAT = 1 ]; then
-		cp $IMG_DIR/build/Release-appletvos/libSDL2_image.a ./libSDL2_image-device.a
-		cp $IMG_DIR/build/Release-appletvsimulator/libSDL2_image.a ./libSDL2_image-simulator.a
-		lipo -create libSDL2_image-device.a libSDL2_image-simulator.a -output ./release/tvos/fat/libSDL2_image.a
-		rm libSDL2_image-*
+		cp $FNA3D_DIR/build/Release-appletvos/libFNA3D.a ./libFNA3D-device.a
+		cp $FNA3D_DIR/build/Release-appletvsimulator/libFNA3D.a ./libFNA3D-simulator.a
+		lipo -create libFNA3D-device.a libFNA3D-simulator.a -output ./release/tvos/fat/libFNA3D.a
+		rm libFNA3D-*
 	fi
+
+	# Undo the SDL/ directory name change
+	mv ./SDL2 ./SDL
 }
 
 function buildFAudio() {
@@ -225,76 +227,6 @@ function buildFAudio() {
 	mv ./SDL2 ./SDL
 }
 
-function runMojoShaderCMake() {
-	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DIOS_PLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
-}
-
-function buildMojoShader() {
-
-	# Remember where we were...
-	ORIG_DIR=`pwd`
-
-	# Make the output build directories if needed
-	if [ ! -d "./mojoshader/build-ios-sim" ]; then
-		mkdir ./mojoshader/build-ios-sim
-		mkdir ./mojoshader/build-ios
-		mkdir ./mojoshader/build-tvos-sim
-		mkdir ./mojoshader/build-tvos
-	fi
-
-	# iOS Simulator
-	if [ $IOS_SIM = 1 ]; then
-		cd ./mojoshader/build-ios-sim/
-		runMojoShaderCMake SIMULATOR64
-		xcodebuild -project MojoShader.xcodeproj ONLY_ACTIVE_ARCH=NO -target mojoshader -configuration Release clean build
-		cp ./Release-iphonesimulator/libmojoshader.a $ORIG_DIR/release/ios/simulator/libmojoshader.a
-		cd $ORIG_DIR
-	fi
-
-	# iOS Device
-	if [ $IOS = 1 ]; then
-		cd ./mojoshader/build-ios/
-		runMojoShaderCMake OS64
-		xcodebuild -project MojoShader.xcodeproj ONLY_ACTIVE_ARCH=NO -target mojoshader -configuration Release clean build
-		cp ./Release-iphoneos/libmojoshader.a $ORIG_DIR/release/ios/device/libmojoshader.a
-		cd $ORIG_DIR
-	fi
-
-	# iOS Combine
-	if [ $IOS_FAT = 1 ]; then
-		cp ./mojoshader/build-ios/Release-iphoneos/libmojoshader.a ./libmojoshader-device.a
-		cp ./mojoshader/build-ios-sim/Release-iphonesimulator/libmojoshader.a ./libmojoshader-simulator.a
-		lipo -create libmojoshader-device.a libmojoshader-simulator.a -output ./release/ios/fat/libmojoshader.a
-		rm libmojoshader-*
-	fi
-
-	# tvOS Simulator
-	if [ $TVOS_SIM = 1 ]; then
-		cd ./mojoshader/build-tvos-sim/
-		runMojoShaderCMake SIMULATOR_TVOS
-		xcodebuild -project MojoShader.xcodeproj ONLY_ACTIVE_ARCH=NO -target mojoshader -configuration Release clean build
-		cp ./Release-appletvsimulator/libmojoshader.a $ORIG_DIR/release/tvos/simulator/libmojoshader.a
-		cd $ORIG_DIR
-	fi
-
-	# tvOS Device
-	if [ $TVOS = 1 ]; then
-		cd ./mojoshader/build-tvos/
-		runMojoShaderCMake TVOS
-		xcodebuild -project MojoShader.xcodeproj ONLY_ACTIVE_ARCH=NO -target mojoshader -configuration Release clean build
-		cp ./Release-appletvos/libmojoshader.a $ORIG_DIR/release/tvos/device/libmojoshader.a
-		cd $ORIG_DIR
-	fi
-
-	# tvOS Combine
-	if [ $TVOS_FAT = 1 ]; then
-		cp ./mojoshader/build-tvos/Release-appletvos/libmojoshader.a ./libmojoshader-device.a
-		cp ./mojoshader/build-tvos-sim/Release-appletvsimulator/libmojoshader.a ./libmojoshader-simulator.a
-		lipo -create libmojoshader-device.a libmojoshader-simulator.a -output ./release/tvos/fat/libmojoshader.a
-		rm libmojoshader-*
-	fi
-}
-
 function buildTheorafile() {
 	# iOS Simulator
 	if [ $IOS_SIM = 1 ]; then
@@ -339,7 +271,6 @@ function buildTheorafile() {
 
 # Build 'em all!
 buildSDL
-buildIMG
+buildFNA3D
 buildFAudio
-buildMojoShader
 buildTheorafile

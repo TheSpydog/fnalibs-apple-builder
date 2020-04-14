@@ -1,39 +1,48 @@
-diff -r 7cc4fc886d9e Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
---- a/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Dec 23 19:55:10 2019 +0300
-+++ b/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Dec 23 17:31:46 2019 -0500
-@@ -359,6 +359,7 @@
- 		63CC93C823849391002A5C54 /* SDL_strtokr.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CC93C623849391002A5C54 /* SDL_strtokr.c */; };
- 		63CC93C923849391002A5C54 /* SDL_strtokr.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CC93C623849391002A5C54 /* SDL_strtokr.c */; };
- 		63CC93CA23849391002A5C54 /* SDL_strtokr.c in Sources */ = {isa = PBXBuildFile; fileRef = 63CC93C623849391002A5C54 /* SDL_strtokr.c */; };
-+		7B53335B23B1778F003D1666 /* SDL_FNA_tvos_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B53335A23B1778F003D1666 /* SDL_FNA_tvos_stubs.c */; };
+diff -r 5dee5d7c6c42 Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
+--- a/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Apr 13 19:44:26 2020 -0700
++++ b/Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj	Mon Apr 13 23:19:00 2020 -0400
+@@ -366,6 +366,8 @@
+ 		75BB5C6A241EA8C300D75403 /* SDL_virtualjoystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BB5C65241EA8C300D75403 /* SDL_virtualjoystick_c.h */; };
+ 		75BB5C6B241EA8C300D75403 /* SDL_virtualjoystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BB5C65241EA8C300D75403 /* SDL_virtualjoystick_c.h */; };
+ 		75BB5C6C241EA8C300D75403 /* SDL_virtualjoystick_c.h in Headers */ = {isa = PBXBuildFile; fileRef = 75BB5C65241EA8C300D75403 /* SDL_virtualjoystick_c.h */; };
++		7B53BD942445612400ACB99B /* SDL_FNA_tvos_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B53BD932445612400ACB99B /* SDL_FNA_tvos_stubs.c */; };
++		7B53BD952445612400ACB99B /* SDL_FNA_tvos_stubs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7B53BD932445612400ACB99B /* SDL_FNA_tvos_stubs.c */; };
  		93CB792313FC5E5200BD3E05 /* SDL_uikitviewcontroller.h in Headers */ = {isa = PBXBuildFile; fileRef = 93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */; };
  		93CB792613FC5F5300BD3E05 /* SDL_uikitviewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */; };
  		A704172E20F7E74800A82227 /* controller_type.h in Headers */ = {isa = PBXBuildFile; fileRef = A704172D20F7E74800A82227 /* controller_type.h */; };
-@@ -976,6 +977,7 @@
- 		56ED04E0118A8EE200A56AA6 /* SDL_power.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_power.c; sourceTree = "<group>"; };
- 		56ED04E2118A8EFD00A56AA6 /* SDL_syspower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_syspower.m; sourceTree = "<group>"; };
+@@ -996,6 +998,7 @@
  		63CC93C623849391002A5C54 /* SDL_strtokr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_strtokr.c; sourceTree = "<group>"; };
-+		7B53335A23B1778F003D1666 /* SDL_FNA_tvos_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_FNA_tvos_stubs.c; sourceTree = "<group>"; };
+ 		75BB5C64241EA8C300D75403 /* SDL_virtualjoystick.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_virtualjoystick.c; sourceTree = "<group>"; };
+ 		75BB5C65241EA8C300D75403 /* SDL_virtualjoystick_c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_virtualjoystick_c.h; sourceTree = "<group>"; };
++		7B53BD932445612400ACB99B /* SDL_FNA_tvos_stubs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SDL_FNA_tvos_stubs.c; sourceTree = "<group>"; };
  		93CB792213FC5E5200BD3E05 /* SDL_uikitviewcontroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_uikitviewcontroller.h; sourceTree = "<group>"; };
  		93CB792513FC5F5300BD3E05 /* SDL_uikitviewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDL_uikitviewcontroller.m; sourceTree = "<group>"; };
  		A704172D20F7E74800A82227 /* controller_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controller_type.h; sourceTree = "<group>"; };
-@@ -1661,6 +1663,7 @@
+@@ -1697,6 +1700,7 @@
  		FD99B8BD0DD52E6D00FB1D6B /* Library Source */ = {
  			isa = PBXGroup;
  			children = (
-+				7B53335A23B1778F003D1666 /* SDL_FNA_tvos_stubs.c */,
++				7B53BD932445612400ACB99B /* SDL_FNA_tvos_stubs.c */,
  				04B2ECEF1025CEB900F9BC5F /* atomic */,
  				FD99B8FB0DD52EDC00FB1D6B /* audio */,
  				FD99B98A0DD52EDC00FB1D6B /* cpuinfo */,
-@@ -2743,6 +2746,7 @@
- 				FAB598251BB5C31500BE72C5 /* SDL_audiocvt.c in Sources */,
- 				FAB598271BB5C31500BE72C5 /* SDL_audiotypecvt.c in Sources */,
- 				FAB598281BB5C31500BE72C5 /* SDL_mixer.c in Sources */,
-+				7B53335B23B1778F003D1666 /* SDL_FNA_tvos_stubs.c in Sources */,
- 				F3BDD79720F51CB8004ECBF3 /* SDL_hidapi_xboxone.c in Sources */,
- 				FAB5982A1BB5C31500BE72C5 /* SDL_wave.c in Sources */,
- 				FAFDF8C61D88D4530083E6F2 /* SDL_uikitclipboard.m in Sources */,
-@@ -3065,6 +3069,7 @@
+@@ -2836,6 +2840,7 @@
+ 				FAB5985D1BB5C31600BE72C5 /* SDL_blendfillrect.c in Sources */,
+ 				FAB5985F1BB5C31600BE72C5 /* SDL_blendline.c in Sources */,
+ 				FAB598611BB5C31600BE72C5 /* SDL_blendpoint.c in Sources */,
++				7B53BD952445612400ACB99B /* SDL_FNA_tvos_stubs.c in Sources */,
+ 				FAB598641BB5C31600BE72C5 /* SDL_drawline.c in Sources */,
+ 				FAB598661BB5C31600BE72C5 /* SDL_drawpoint.c in Sources */,
+ 				FAB598681BB5C31600BE72C5 /* SDL_render_sw.c in Sources */,
+@@ -2970,6 +2975,7 @@
+ 				FDA685FB0DF244C800F98A1A /* SDL_nullevents.c in Sources */,
+ 				FDA685FF0DF244C800F98A1A /* SDL_nullvideo.c in Sources */,
+ 				FD5F9D2F0E0E08B3008E885B /* SDL_joystick.c in Sources */,
++				7B53BD942445612400ACB99B /* SDL_FNA_tvos_stubs.c in Sources */,
+ 				FD689F030E26E5B600F90B21 /* SDL_sysjoystick.m in Sources */,
+ 				FD689F1D0E26E5D900F90B21 /* SDL_uikitevents.m in Sources */,
+ 				AA13B35A1FB8B46400D9FEE6 /* yuv_rgb.c in Sources */,
+@@ -3119,6 +3125,7 @@
  				ENABLE_TESTABILITY = YES;
  				GCC_NO_COMMON_BLOCKS = YES;
  				GCC_OPTIMIZATION_LEVEL = 0;
@@ -41,7 +50,7 @@ diff -r 7cc4fc886d9e Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
  				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
  				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
  				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-@@ -3103,6 +3108,7 @@
+@@ -3157,6 +3164,7 @@
  				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
  				ENABLE_STRICT_OBJC_MSGSEND = YES;
  				GCC_NO_COMMON_BLOCKS = YES;
@@ -49,10 +58,10 @@ diff -r 7cc4fc886d9e Xcode-iOS/SDL/SDL.xcodeproj/project.pbxproj
  				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
  				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
  				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-diff -r 7cc4fc886d9e src/SDL_FNA_tvos_stubs.c
+diff -r 5dee5d7c6c42 src/SDL_FNA_tvos_stubs.c
 --- /dev/null	Thu Jan 01 00:00:00 1970 +0000
-+++ b/src/SDL_FNA_tvos_stubs.c	Mon Dec 23 17:31:46 2019 -0500
-@@ -0,0 +1,103 @@
++++ b/src/SDL_FNA_tvos_stubs.c	Mon Apr 13 23:19:00 2020 -0400
+@@ -0,0 +1,108 @@
 +//
 +//  SDL_FNA_tvos_dummy.c
 +//  A bunch of empty function definitions for Android/Windows-specific stuff in SDL2.
@@ -93,6 +102,11 @@ diff -r 7cc4fc886d9e src/SDL_FNA_tvos_stubs.c
 +}
 +
 +extern void * SDL_AndroidGetActivity(void)
++{
++    return 0;
++}
++
++extern int SDL_GetAndroidSDKVersion(void)
 +{
 +    return 0;
 +}
