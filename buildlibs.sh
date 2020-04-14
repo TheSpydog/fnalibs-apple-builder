@@ -2,7 +2,7 @@
 
 # Builds all fnalibs for iOS or tvOS.
 # Written by Caleb Cornett.
-# Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/clean]
+# Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/all/clean]
 
 #TODO: Support Debug configurations
 
@@ -41,6 +41,13 @@ elif [ $1 = "tvos" ]; then
 elif [ $1 = "tvos-sim" ]; then
 	TVOS_SIM=1
 elif [ $1 = "tvos-fat" ]; then
+	TVOS=1
+	TVOS_SIM=1
+	TVOS_FAT=1
+elif [ $1 = "all" ]; then
+	IOS=1
+	IOS_SIM=1
+	IOS_FAT=1
 	TVOS=1
 	TVOS_SIM=1
 	TVOS_FAT=1
@@ -226,7 +233,7 @@ function buildFAudio() {
 }
 
 function runMojoShaderCMake() {
-	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DIOS_PLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
+	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DPLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
 }
 
 function buildMojoShader() {
