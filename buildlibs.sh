@@ -2,13 +2,13 @@
 
 # Builds all fnalibs for iOS or tvOS.
 # Written by Caleb Cornett.
-# Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/clean]
+# Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/all/clean]
 
 #TODO: Support Debug configurations
 
 # Handle usage errors...
 function error() {
-	echo "Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/clean]"
+	echo "Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/all/clean]"
 	exit 1
 }
 
@@ -41,6 +41,13 @@ elif [ $1 = "tvos" ]; then
 elif [ $1 = "tvos-sim" ]; then
 	TVOS_SIM=1
 elif [ $1 = "tvos-fat" ]; then
+	TVOS=1
+	TVOS_SIM=1
+	TVOS_FAT=1
+elif [ $1 = "all" ]; then
+	IOS=1
+	IOS_SIM=1
+	IOS_FAT=1
 	TVOS=1
 	TVOS_SIM=1
 	TVOS_FAT=1
