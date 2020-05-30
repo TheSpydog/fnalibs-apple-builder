@@ -8,7 +8,7 @@
 
 # Handle usage errors...
 function error() {
-	echo "Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/clean]"
+	echo "Usage: ./buildlibs [ios/ios-sim/ios-fat/tvos/tvos-sim/tvos-fat/all/clean]"
 	exit 1
 }
 
@@ -233,7 +233,7 @@ function buildFAudio() {
 }
 
 function runMojoShaderCMake() {
-	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DPLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
+	cmake .. -GXcode -DCMAKE_TOOLCHAIN_FILE=ios.toolchain.cmake -DPLATFORM=$1 -DPROFILE_D3D=OFF -DPROFILE_BYTECODE=OFF -DPROFILE_ARB1=OFF -DPROFILE_ARB1_NV=OFF -DPROFILE_METAL=ON -DPROFILE_SPIRV=OFF -DPROFILE_GLSPIRV=OFF -DCOMPILER_SUPPORT=OFF -DFLIP_VIEWPORT=ON -DDEPTH_CLIPPING=ON -DXNA4_VERTEXTEXTURE=ON
 }
 
 function buildMojoShader() {

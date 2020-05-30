@@ -30,7 +30,7 @@ fi
 
 if [ ! -d "./MojoShader/" ]; then
 	echo "MojoShader folder not found. Cloning now..."
-	git clone https://github.com/FNA-XNA/MojoShader
+	git clone --branch fna https://github.com/FNA-XNA/MojoShader
 
 	# Download the iOS CMake toolchain file too for convenience
 	echo ""
