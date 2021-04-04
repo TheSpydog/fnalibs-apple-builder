@@ -2,14 +2,14 @@
 
 # Clones or pulls the latest fnalibs.
 # Intended for use with FNA on iOS / tvOS.
-# Requires both hg and git.
+# Requires git to be installed.
 # Written by Caleb Cornett.
 # Usage: ./updatelibs.sh
 
 # Clone repos if needed
-if [ ! -d "./SDL/" ]; then
-	echo "SDL folder not found. Cloning now..."
-	hg clone https://hg.libsdl.org/SDL/
+if [ ! -d "./SDL2/" ]; then
+	echo "SDL2 folder not found. Cloning now..."
+	git clone https://github.com/libsdl-org/SDL.git SDL2
 
 	echo ""
 fi
@@ -36,17 +36,17 @@ if [ ! -d "./Theorafile/" ]; then
 fi
 
 # Check for updates...
-echo "Updating SDL..."
-cd SDL && hg pull -u && cd ..
+echo "Updating SDL2..."
+cd SDL2 && git pull && cd ..
 
-# Apply the IOS_DYLIB=1 / tvOS stub patch for convenience
+# Apply the IOS_DYLIB=1 patch for convenience
 echo ""
-echo "Applying iOS/tvOS patch for convenience..."
-cd SDL
-# Reset back to pristine
-hg update -r default -C && hg st -un0 | xargs -0 rm
+echo "Applying SDL2 iOS patch for convenience..."
+cd SDL2
+# Reset in case local changes made the patch incompatible
+git reset --hard
 # Apply patch
-hg import --no-commit ../sdl2_fna_ios.patch
+git apply ../sdl2_fna_ios.patch
 cd ..
 
 echo ""
