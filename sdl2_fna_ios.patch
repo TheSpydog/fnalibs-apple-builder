@@ -258,7 +258,7 @@ index 000000000..4dd7cbf8e
 +    return (void *)0;
 +}
 +
-+extern int INTERNAL_SDL_AndroidShowToast(void *message, int duration, int gravity, int xOffset, int yOffset)
++extern int SDL_AndroidShowToast(void *message, int duration, int gravity, int xOffset, int yOffset)
 +{
 +    return -1;
 +}
