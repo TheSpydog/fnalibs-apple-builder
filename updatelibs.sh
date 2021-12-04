@@ -2,7 +2,7 @@
 
 # Clones or pulls the latest fnalibs.
 # Intended for use with FNA on iOS / tvOS.
-# Requires git to be installed.
+# Requires git, cmake, and python3 to be installed.
 # Written by Caleb Cornett.
 # Usage: ./updatelibs.sh
 
@@ -35,19 +35,14 @@ if [ ! -d "./Theorafile/" ]; then
 	echo ""
 fi
 
+if [ ! -d "./MoltenVK" ]; then
+	echo "MoltenVK folder not found. Cloning now..."
+	git clone --recursive https://github.com/KhronosGroup/MoltenVK
+fi
+
 # Check for updates...
 echo "Updating SDL2..."
 cd SDL2 && git pull && cd ..
-
-# Apply the IOS_DYLIB=1 patch for convenience
-echo ""
-echo "Applying SDL2 iOS patch for convenience..."
-cd SDL2
-# Reset in case local changes made the patch incompatible
-git reset --hard
-# Apply patch
-git apply ../sdl2_fna_ios.patch
-cd ..
 
 echo ""
 echo "Updating FNA3D..."
@@ -60,3 +55,7 @@ cd FAudio && git pull && cd ..
 echo ""
 echo "Updating Theorafile..."
 cd Theorafile && git pull && cd ..
+
+echo ""
+echo "Updating MoltenVK..."
+cd MoltenVK && git pull && cd ..
