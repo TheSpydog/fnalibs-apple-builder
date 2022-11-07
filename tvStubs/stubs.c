@@ -98,6 +98,11 @@ extern int SDL_WinRTRunApp(void* mainFunction, void* reserved)
     return 0;
 }
 
+extern int SDL_GDKRunApp(void *mainFunction, void *reserved)
+{
+    return 0;
+}
+
 extern int SDL_AndroidRequestPermission(const char *permission)
 {
     return 0;
