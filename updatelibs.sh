@@ -9,7 +9,7 @@
 # Clone repos if needed
 if [ ! -d "./SDL2/" ]; then
 	echo "SDL2 folder not found. Cloning now..."
-	git clone https://github.com/libsdl-org/SDL.git SDL2
+	git clone --branch SDL2 https://github.com/libsdl-org/SDL.git SDL2
 
 	echo ""
 fi
