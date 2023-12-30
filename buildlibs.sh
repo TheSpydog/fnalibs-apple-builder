@@ -25,6 +25,7 @@ FAUDIO_CMAKE_DIR="FAudio/builddir"
 THEO_XCODE_DIR="Theorafile/Xcode-iOS"
 TV_STUBS_DIR="tvStubs"
 MVK_DIR="MoltenVK"
+VK_LOADER_CMAKE_DIR="Vulkan-Loader/builddir"
 
 # Set the Xcode project names
 SDL_PROJ="SDL.xcodeproj"
@@ -60,16 +61,17 @@ elif [ $1 = "all" ]; then
 elif [ $1 = "clean" ]; then
 	rm -rf ./bin/
 
-	rm -r $SDL_CMAKE_DIR
-	rm -r $FNA3D_CMAKE_DIR
-	rm -r $FAUDIO_CMAKE_DIR
-	rm "Theorafile/libtheorafile.dylib"
+	rm -rf $SDL_CMAKE_DIR
+	rm -rf $FNA3D_CMAKE_DIR
+	rm -rf $FAUDIO_CMAKE_DIR
+	rm -f "Theorafile/libtheorafile.dylib"
+	rm -rf $VK_LOADER_CMAKE_DIR
 
-	rm -r $SDL_XCODE_DIR/build
-	rm -r $FNA3D_XCODE_DIR/build
-	rm -r $FAUDIO_XCODE_DIR/build
-	rm -r $THEO_XCODE_DIR/build
-	rm -r $TV_STUBS_DIR/build
+	rm -rf $SDL_XCODE_DIR/build
+	rm -rf $FNA3D_XCODE_DIR/build
+	rm -rf $FAUDIO_XCODE_DIR/build
+	rm -rf $THEO_XCODE_DIR/build
+	rm -rf $TV_STUBS_DIR/build
 
 	cd $MVK_DIR
 	make clean
@@ -98,7 +100,7 @@ function buildSDL()
 {
 	# macOS
 	if [ $MACOS = 1 ]; then
-		mkdir $SDL_CMAKE_DIR
+		mkdir -p $SDL_CMAKE_DIR
 		cd $SDL_CMAKE_DIR
 		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
 			-DSDL_STATIC=OFF \
@@ -143,18 +145,18 @@ function buildFNA3D()
 {
 	# macOS
 	if [ $MACOS = 1 ]; then
-		mkdir $FNA3D_CMAKE_DIR
+		mkdir -p $FNA3D_CMAKE_DIR
 		cd $FNA3D_CMAKE_DIR
 		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
 			-DSDL2_INCLUDE_DIRS="$PWD/../../SDL2/include" \
-			-DSDL2_LIBRARIES="$PWD/../../SDL2/builddir/libSDL2-2.0.0.dylib"
+			-DSDL2_LIBRARIES="$PWD/../../$SDL_CMAKE_DIR/libSDL2-2.0.0.dylib"
 		make
 
 		# HACK: Remove the LC_RPATH if it's set.
 		# Ideally CMake could just NOT set this in the first place...
 		local otoolOutput=$(otool -l libFNA3D.0.dylib)
 		if [[ $otoolOutput == *"LC_RPATH"* ]]; then
-			install_name_tool -delete_rpath "$PWD/../../SDL2/builddir" libFNA3D.0.dylib
+			install_name_tool -delete_rpath "$PWD/../../$SDL_CMAKE_DIR" libFNA3D.0.dylib
 		fi
 
 		cd ../..
@@ -190,18 +192,18 @@ function buildFAudio()
 {
 	# macOS
 	if [ $MACOS = 1 ]; then
-		mkdir $FAUDIO_CMAKE_DIR
+		mkdir -p $FAUDIO_CMAKE_DIR
 		cd $FAUDIO_CMAKE_DIR
 		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
 			-DSDL2_INCLUDE_DIRS="$PWD/../../SDL2/include" \
-			-DSDL2_LIBRARIES="$PWD/../../SDL2/builddir/libSDL2-2.0.0.dylib"
+			-DSDL2_LIBRARIES="$PWD/../../$SDL_CMAKE_DIR/libSDL2-2.0.0.dylib"
 		make
 
 		# HACK: Remove the LC_RPATH if it's set.
 		# Ideally CMake could just NOT set this in the first place...
 		local otoolOutput=$(otool -l libFAudio.0.dylib)
 		if [[ $otoolOutput == *"LC_RPATH"* ]]; then
-			install_name_tool -delete_rpath "$PWD/../../SDL2/builddir" libFAudio.0.dylib
+			install_name_tool -delete_rpath "$PWD/../../$SDL_CMAKE_DIR" libFAudio.0.dylib
 		fi
 
 		cd ../..
@@ -302,23 +304,28 @@ function buildStubs()
 	fi
 }
 
-function copyPrebuilts()
-{
-	# macOS
-	if [ $MACOS = 1 ]; then
-		cp ./prebuilts/macos/libvulkan.1.dylib ./bin/macos
-	fi
-}
-
 function buildMVK()
 {
 	# macOS
 	if [ $MACOS = 1 ]; then
+		# Build MoltenVK itself
 		cd $MVK_DIR
 		./fetchDependencies --macos -v
 		make macos
 		cd ..
 		cp $MVK_DIR/Package/Release/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/macos
+
+		# Build Vulkan-Loader
+		mkdir -p $VK_LOADER_CMAKE_DIR
+		cd $VK_LOADER_CMAKE_DIR
+		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
+			-DUPDATE_DEPS=ON \
+			-DVULKAN_HEADERS_INSTALL_DIR="$PWD/../../Vulkan-Headers" \
+			-DCMAKE_BUILD_TYPE=Release \
+			-DCMAKE_OSX_DEPLOYMENT_TARGET=10.13
+		make
+		cd ../..
+		cp $VK_LOADER_CMAKE_DIR/loader/libvulkan.1.dylib ./bin/macos
 	fi
 
 	# iOS Simulator
@@ -359,7 +366,7 @@ function buildMVK()
 }
 
 # Build 'em all!
-buildSDL && buildFNA3D && buildFAudio && buildTheorafile && buildStubs && copyPrebuilts
+buildSDL && buildFNA3D && buildFAudio && buildTheorafile && buildStubs
 
 while true; do
     read -p "Do you want to build MoltenVK as well? This is required for FNA3D, but building takes a while so it can be skipped on subsequent rebuilds. (y/n) " yn

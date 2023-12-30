@@ -1,1 +1,0 @@
-`libvulkan.1.dylib` is taken from from the [LunarG SDK](https://vulkan.lunarg.com/sdk/home#mac) (v1.3.268.1). To update this file, install the latest MacOS Vulkan SDK, then copy `/usr/local/lib/libvulkan.1.dylib` -> `prebuilts/macos`.

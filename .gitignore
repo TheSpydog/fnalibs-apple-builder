@@ -4,4 +4,6 @@ FAudio/
 FNA3D/
 MoltenVK/
 Theorafile/
+Vulkan-Headers/
+Vulkan-Loader/
 tvStubs/build/
