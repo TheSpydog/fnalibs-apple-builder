@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Clones or pulls the latest fnalibs.
-# Intended for use with FNA on iOS / tvOS.
+# Intended for use with FNA on macOS, iOS, and tvOS.
 # Requires git, cmake, and python3 to be installed.
 # Written by Caleb Cornett.
 # Usage: ./updatelibs.sh
@@ -40,6 +40,16 @@ if [ ! -d "./MoltenVK" ]; then
 	git clone --recursive https://github.com/KhronosGroup/MoltenVK
 fi
 
+if [ ! -d "./Vulkan-Headers" ]; then
+	echo "Vulkan-Headers folder not found. Cloning now..."
+	git clone https://github.com/KhronosGroup/Vulkan-Headers
+fi
+
+if [ ! -d "./Vulkan-Loader" ]; then
+	echo "Vulkan-Loader folder not found. Cloning now..."
+	git clone https://github.com/KhronosGroup/Vulkan-Loader
+fi
+
 # Check for updates...
 echo "Updating SDL2..."
 cd SDL2 && git pull && cd ..
@@ -58,4 +68,12 @@ cd Theorafile && git pull && cd ..
 
 echo ""
 echo "Updating MoltenVK..."
-cd MoltenVK && git pull && cd ..
+cd MoltenVK && git pull && git submodule update && cd ..
+
+echo ""
+echo "Updating Vulkan-Headers..."
+cd Vulkan-Headers && git pull && cd ..
+
+echo ""
+echo "Updating Vulkan-Loader..."
+cd Vulkan-Loader && git pull && cd ..
