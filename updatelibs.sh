@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Clones or pulls the latest fnalibs.
-# Intended for use with FNA on iOS / tvOS.
+# Intended for use with FNA on macOS, iOS, and tvOS.
 # Requires git, cmake, and python3 to be installed.
 # Written by Caleb Cornett.
 # Usage: ./updatelibs.sh
@@ -58,4 +58,4 @@ cd Theorafile && git pull && cd ..
 
 echo ""
 echo "Updating MoltenVK..."
-cd MoltenVK && git pull && cd ..
+cd MoltenVK && git pull && git submodule update && cd ..

@@ -1,0 +1,7 @@
+bin/
+SDL2/
+FAudio/
+FNA3D/
+MoltenVK/
+Theorafile/
+tvStubs/build/
