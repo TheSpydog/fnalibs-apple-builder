@@ -100,7 +100,11 @@ function buildSDL()
 	if [ $MACOS = 1 ]; then
 		mkdir $SDL_CMAKE_DIR
 		cd $SDL_CMAKE_DIR
-		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" -DSDL_STATIC=OFF -DSDL_TEST=OFF -DSDL2_DISABLE_SDL2MAIN=ON
+		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
+			-DSDL_STATIC=OFF \
+			-DSDL_TEST=OFF \
+			-DSDL2_DISABLE_SDL2MAIN=ON \
+			-DCMAKE_OSX_DEPLOYMENT_TARGET=10.9
 		make
 		cd ../..
 		cp $SDL_CMAKE_DIR/libSDL2-2.0.0.dylib ./bin/macos
