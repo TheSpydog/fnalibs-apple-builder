@@ -1,4 +1,4 @@
-# fnalibs appleBuilder
+# fnalibs-apple-builder
 Convenient download and build scripts for FNA's macOS / iOS / tvOS native libraries.
 
 Run `./updatelibs` to automatically clone or pull all the fnalibs.
