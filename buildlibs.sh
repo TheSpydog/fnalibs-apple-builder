@@ -25,7 +25,7 @@ FAUDIO_CMAKE_DIR="FAudio/builddir"
 THEO_XCODE_DIR="Theorafile/Xcode-iOS"
 TV_STUBS_DIR="tvStubs"
 MVK_DIR="MoltenVK"
-VK_LOADER_CMAKE_DIR="Vulkan-Loader/builddir"
+VKLOADER_CMAKE_DIR="Vulkan-Loader/builddir"
 
 # Set the Xcode project names
 SDL_PROJ="SDL.xcodeproj"
@@ -65,7 +65,7 @@ elif [ $1 = "clean" ]; then
 	rm -rf $FNA3D_CMAKE_DIR
 	rm -rf $FAUDIO_CMAKE_DIR
 	rm -f "Theorafile/libtheorafile.dylib"
-	rm -rf $VK_LOADER_CMAKE_DIR
+	rm -rf $VKLOADER_CMAKE_DIR
 
 	rm -rf $SDL_XCODE_DIR/build
 	rm -rf $FNA3D_XCODE_DIR/build
@@ -316,8 +316,8 @@ function buildMVK()
 		cp $MVK_DIR/Package/Release/MoltenVK/dylib/macOS/libMoltenVK.dylib ./bin/macos
 
 		# Build Vulkan-Loader
-		mkdir -p $VK_LOADER_CMAKE_DIR
-		cd $VK_LOADER_CMAKE_DIR
+		mkdir -p $VKLOADER_CMAKE_DIR
+		cd $VKLOADER_CMAKE_DIR
 		cmake .. -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64" \
 			-DUPDATE_DEPS=ON \
 			-DVULKAN_HEADERS_INSTALL_DIR="$PWD/../../Vulkan-Headers" \
@@ -325,7 +325,7 @@ function buildMVK()
 			-DCMAKE_OSX_DEPLOYMENT_TARGET=10.13
 		make
 		cd ../..
-		cp $VK_LOADER_CMAKE_DIR/loader/libvulkan.1.dylib ./bin/macos
+		cp $VKLOADER_CMAKE_DIR/loader/libvulkan.1.dylib ./bin/macos
 	fi
 
 	# iOS Simulator
