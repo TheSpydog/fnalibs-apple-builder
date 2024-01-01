@@ -165,25 +165,25 @@ function buildFNA3D()
 
 	# iOS Simulator
 	if [ $IOS_SIM = 1 ]; then
-		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk iphonesimulator
+		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D-iOS -config Release -sdk iphonesimulator
 		cp $FNA3D_XCODE_DIR/build/Release-iphonesimulator/libFNA3D.a ./bin/ios/simulator
 	fi
 
 	# iOS Device
 	if [ $IOS = 1 ]; then
-		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk iphoneos
+		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D-iOS -config Release -sdk iphoneos
 		cp $FNA3D_XCODE_DIR/build/Release-iphoneos/libFNA3D.a ./bin/ios/device
 	fi
 
 	# tvOS Simulator
 	if [ $TVOS_SIM = 1 ]; then
-		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk appletvsimulator
+		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D-tvOS -config Release -sdk appletvsimulator
 		cp $FNA3D_XCODE_DIR/build/Release-appletvsimulator/libFNA3D.a ./bin/tvos/simulator
 	fi
 
 	# tvOS Device
 	if [ $TVOS = 1 ]; then
-		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D -config Release -sdk appletvos
+		xcodebuild -project $FNA3D_XCODE_DIR/$FNA3D_PROJ -target FNA3D-tvOS -config Release -sdk appletvos
 		cp $FNA3D_XCODE_DIR/build/Release-appletvos/libFNA3D.a ./bin/tvos/device
 	fi
 }
@@ -212,25 +212,25 @@ function buildFAudio()
 
 	# iOS Simulator
 	if [ $IOS_SIM = 1 ]; then
-		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio -config Release -sdk iphonesimulator
+		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio-iOS -config Release -sdk iphonesimulator
 		cp $FAUDIO_XCODE_DIR/build/Release-iphonesimulator/libFAudio.a ./bin/ios/simulator
 	fi
 
 	# iOS Device
 	if [ $IOS = 1 ]; then
-		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio -config Release -sdk iphoneos
+		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio-iOS -config Release -sdk iphoneos
 		cp $FAUDIO_XCODE_DIR/build/Release-iphoneos/libFAudio.a ./bin/ios/device
 	fi
 
 	# tvOS Simulator
 	if [ $TVOS_SIM = 1 ]; then
-		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio -config Release -sdk appletvsimulator
+		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio-tvOS -config Release -sdk appletvsimulator
 		cp $FAUDIO_XCODE_DIR/build/Release-appletvsimulator/libFAudio.a ./bin/tvos/simulator
 	fi
 
 	# tvOS Device
 	if [ $TVOS = 1 ]; then
-		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio -config Release -sdk appletvos
+		xcodebuild -project $FAUDIO_XCODE_DIR/$FAUDIO_PROJ -target FAudio-tvOS -config Release -sdk appletvos
 		cp $FAUDIO_XCODE_DIR/build/Release-appletvos/libFAudio.a ./bin/tvos/device
 	fi
 }
@@ -264,25 +264,25 @@ function buildTheorafile()
 
 	# iOS Simulator
 	if [ $IOS_SIM = 1 ]; then
-		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile -config Release -sdk iphonesimulator
+		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile-iOS -config Release -sdk iphonesimulator
 		cp $THEO_XCODE_DIR/build/Release-iphonesimulator/libtheorafile.a ./bin/ios/simulator
 	fi
 
 	# iOS Device
 	if [ $IOS = 1 ]; then
-		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile -config Release -sdk iphoneos
+		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile-iOS -config Release -sdk iphoneos
 		cp $THEO_XCODE_DIR/build/Release-iphoneos/libtheorafile.a ./bin/ios/device
 	fi
 
 	# tvOS Simulator
 	if [ $TVOS_SIM = 1 ]; then
-		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile -config Release -sdk appletvsimulator
+		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile-tvOS -config Release -sdk appletvsimulator
 		cp $THEO_XCODE_DIR/build/Release-appletvsimulator/libtheorafile.a ./bin/tvos/simulator
 	fi
 
 	# tvOS Device
 	if [ $TVOS = 1 ]; then
-		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile -config Release -sdk appletvos
+		xcodebuild -project $THEO_XCODE_DIR/$THEO_PROJ -target theorafile-tvOS -config Release -sdk appletvos
 		cp $THEO_XCODE_DIR/build/Release-appletvos/libtheorafile.a ./bin/tvos/device
 	fi
 }
